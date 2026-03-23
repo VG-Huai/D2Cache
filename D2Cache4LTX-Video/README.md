@@ -2,15 +2,11 @@
 
 This folder integrates **D2Cache** with **LTX-Video** and provides scripts for large-scale **VBench**-style generation and evaluation. For the method, paper, and citation, see the [main project README](../README.md).
 
-## Dependencies
+## Installation
 
-Install Python packages (versions should be compatible with your PyTorch / CUDA stack):
+1. **Install LTX-Video** following the official instructions: [https://github.com/Lightricks/LTX-Video](https://github.com/Lightricks/LTX-Video)
 
-```shell
-pip install --upgrade "diffusers[torch]" transformers protobuf tokenizers sentencepiece imageio
-```
-
-Ensure **LTX-Video** weights and any model-specific assets are obtained and placed according to the upstream project’s instructions.
+2. Copy the D2Cache scripts from this folder into your LTX-Video workspace.
 
 ## Usage
 

@@ -2,28 +2,11 @@
 
 This directory contains **VideoSys**-based implementations of D2Cache for **Latte** and **Open-Sora**, including scripts aligned with **VBench** evaluation. For the method, paper, and citation, see the [main project README](../README.md).
 
-## Environment
+## Installation
 
-**Requirements**
+1. **Install VideoSys** following the official instructions: [https://github.com/NUS-HPC-AI-Lab/VideoSys](https://github.com/NUS-HPC-AI-Lab/VideoSys)
 
-- Python ≥ 3.10  
-- PyTorch ≥ 1.13 (PyTorch **2.x** recommended)  
-- CUDA ≥ 11.6  
-
-We recommend a clean Conda environment:
-
-```shell
-conda create -n d2cache python=3.10 -y
-conda activate d2cache
-```
-
-Install the local package (editable install):
-
-```shell
-pip install -e .
-```
-
-Follow `requirements.txt` and upstream **VideoSys** / **ColossalAI** notes if you hit dependency issues on your cluster.
+2. Copy the D2Cache scripts from this folder into your VideoSys workspace.
 
 ## What is included
 

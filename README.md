@@ -4,9 +4,9 @@
 
 **CVPR 2026**
 
-[Enhuai Liu](mailto:eliu0719@sydney.edu.au), [Yunke Wang](mailto:yunke.wang@sydney.edu.au), [Changming Sun](mailto:Changming.Sun@data61.csiro.au), [Chang Xu](mailto:c.xu@sydney.edu.au) (corresponding author)
+[Enhuai Liu](mailto:eliu0719@uni.sydney.edu.au), Yunke Wang, Changming Sun, Chang Xu
 
-The University of Sydney · CSIRO Data61
+The University of Sydney · CSIRO
 
 [[Paper]](./d2cache.pdf) <!-- [[arXiv]]() --> <!-- [[Project Page]]() -->
 
@@ -29,8 +29,7 @@ Video diffusion models are accurate but expensive at inference time because deno
 
 ## 🔥 Highlights
 
-- **Second-order delta caching** for diffusion inference: reuse and correct predictions using second-order residual structure, beyond standard first-order residual caching.
-- **Theoretical analysis:** analysis of delta caching in diffusion models and guarantees motivating second-order correction.
+- **Second-order delta caching** for diffusion inference: reuse and correct predictions using second-order residual with dynamic scaling, beyond standard first-order residual caching.
 - **Empirical evaluation** on multiple video diffusion models and benchmarks, showing consistent gains especially under high speedup.
 - **Training-free plug-in:** no additional training or fine-tuning required.
 
@@ -57,28 +56,17 @@ Each subdirectory contains its own `README.md` with environment setup and detail
 
 ---
 
-## ⚙️ Requirements
-
-- Python ≥ 3.10
-- PyTorch ≥ 2.0
-- CUDA ≥ 11.6
-
----
-
 ## 🚀 Getting Started
+
+D2Cache is a **training-free** plug-in. Install the original repository first, then copy our scripts into your workspace.
 
 ### 1. Wan2.1 (Text-to-Video)
 
+1. Install **Wan2.1**: [https://github.com/Wan-Video/Wan2.1](https://github.com/Wan-Video/Wan2.1)
+2. Copy `D2Cache4Wan2.1/delta2cache_generate.py` into your Wan2.1 workspace.
+3. Run inference:
+
 ```bash
-# Clone and install Wan2.1
-git clone https://github.com/Wan-Video/Wan2.1.git
-cd Wan2.1
-# Follow Wan2.1's official installation instructions
-
-# Copy D2Cache script
-cp /path/to/D2Cache/D2Cache4Wan2.1/delta2cache_generate.py ./
-
-# Generate with D2Cache
 python delta2cache_generate.py \
   --task t2v-1.3B \
   --size 832*480 \
@@ -93,24 +81,21 @@ The flag `--teacache_mode delta_delta` selects the D2Cache second-order caching 
 
 ### 2. Latte & Open-Sora (VideoSys)
 
+1. Install **VideoSys**: [https://github.com/NUS-HPC-AI-Lab/VideoSys](https://github.com/NUS-HPC-AI-Lab/VideoSys)
+2. Copy scripts from `D2Cache4Videosys/` into your VideoSys workspace.
+3. Run inference:
+
 ```bash
-cd D2Cache4Videosys
-
-# Create environment
-conda create -n d2cache python=3.10 -y
-conda activate d2cache
-
-# Install
-pip install -e .
-
-# Generate videos
 python latte_delta2.py
 python opensora_delta2.py
 ```
 
 ### 3. LTX-Video
 
-See [`D2Cache4LTX-Video/README.md`](./D2Cache4LTX-Video/README.md) for detailed instructions.
+1. Install **LTX-Video**: [https://github.com/Lightricks/LTX-Video](https://github.com/Lightricks/LTX-Video)
+2. Copy scripts from `D2Cache4LTX-Video/` into your LTX-Video workspace.
+
+See each subdirectory's `README.md` for detailed instructions.
 
 ---
 
