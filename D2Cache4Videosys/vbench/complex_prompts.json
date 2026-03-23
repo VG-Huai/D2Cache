@@ -1,0 +1,79 @@
+[
+    {
+        "prompt_en": "A child launching a kite into the air, where the wind catches and pulls it upward.",
+        "dimension": [
+            "aesthetic_quality",
+            "imaging_quality"
+        ]
+    },{
+        "prompt_en": "A group of firefighters work together, battling the flames and saving lives",
+        "dimension": [
+            "aesthetic_quality",
+            "imaging_quality"
+        ]
+    },
+    {
+        "prompt_en": "Dog firefighter rescues kittens from a tree",
+        "dimension": [
+            "aesthetic_quality",
+            "imaging_quality"
+        ]
+    },
+    {
+        "prompt_en": "Two dogs play tug-of-war with a rope toy in the backyard.",
+        "dimension": [
+            "aesthetic_quality",
+            "imaging_quality"
+        ]
+    },
+    {
+        "prompt_en": "Football players bump into each other during a game",
+        "dimension": [
+            "aesthetic_quality",
+            "imaging_quality"
+        ]
+    },
+    {
+        "prompt_en": "Man teaches robot to play chess, both concentrating deeply on the game.",
+        "dimension": [
+            "aesthetic_quality",
+            "imaging_quality"
+        ]
+    },
+    {
+        "prompt_en": "Dapper wolf discusses stock market trends",
+        "dimension": [
+            "aesthetic_quality",
+            "imaging_quality"
+        ]
+    },
+    {
+        "prompt_en": "A child jumping onto a trampoline, compressing the surface and bouncing back into the air.",
+        "dimension": [
+            "aesthetic_quality",
+            "imaging_quality"
+        ]
+    },
+    {
+        "prompt_en": "A frog leaping onto a wet rock, causing droplets to splash into the air.",
+        "dimension": [
+            "aesthetic_quality",
+            "imaging_quality"
+        ]
+    },
+    {
+        "prompt_en": "Grandmother bakes cookies with her granddaughter in the kitchen.",
+        "dimension": [
+            "aesthetic_quality",
+            "imaging_quality"
+        ]
+    },
+     {
+        "prompt_en": "Two anthropomorphic cats in comfy boxing gear and bright gloves fight intensely on a spotlighted stage.",
+        "dimension": [
+            "aesthetic_quality",
+            "imaging_quality"
+        ]
+    }
+
+]
