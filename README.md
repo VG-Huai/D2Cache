@@ -1,9 +1,23 @@
+<div align="center">
+
 # D2Cache: Second-Order Delta Caching for Higher Video Diffusion Acceleration
 
-Official PyTorch reference implementations for our **CVPR 2026** paper.
+**CVPR 2026**
 
-**Authors:** [Enhuai Liu](mailto:eliu0719@sydney.edu.au), [Yunke Wang](mailto:yunke.wang@sydney.edu.au), [Changming Sun](mailto:Changming.Sun@data61.csiro.au), [Chang Xu](mailto:c.xu@sydney.edu.au) (corresponding author)  
-**Affiliations:** The University of Sydney · CSIRO Data61
+[Enhuai Liu](mailto:eliu0719@sydney.edu.au), [Yunke Wang](mailto:yunke.wang@sydney.edu.au), [Changming Sun](mailto:Changming.Sun@data61.csiro.au), [Chang Xu](mailto:c.xu@sydney.edu.au) (corresponding author)
+
+The University of Sydney · CSIRO Data61
+
+[[Paper]](./d2cache.pdf) <!-- [[arXiv]]() --> <!-- [[Project Page]]() -->
+
+</div>
+
+---
+
+## 📢 News
+
+- **[2026-03]** D2Cache is accepted by **CVPR 2026**!
+- **[2026-03]** Code and paper are released.
 
 ---
 
@@ -11,53 +25,133 @@ Official PyTorch reference implementations for our **CVPR 2026** paper.
 
 Video diffusion models are accurate but expensive at inference time because denoising is applied sequentially over many timesteps. Caching methods reuse computations across timesteps and often extrapolate from **first-order residuals** (differences between adjacent predictions). We propose **D2Cache**, a **training-free** plug-in that exploits the smoothness of **second-order residual deltas**—temporal differences between consecutive first-order residuals—to predict skipped steps more accurately and curb error accumulation. We further **adaptively scale** second-order terms using signals from timestep embeddings. Across several video diffusion backbones, D2Cache improves quality–latency trade-offs compared with strong first-order caching baselines (e.g., TeaCache), with larger gains under aggressive acceleration.
 
-A camera-ready PDF is included in this repository: [`d2cache.pdf`](./d2cache.pdf).
-
 ---
 
-## Contributions
+## 🔥 Highlights
 
 - **Second-order delta caching** for diffusion inference: reuse and correct predictions using second-order residual structure, beyond standard first-order residual caching.
-- **Theory:** analysis of delta caching in diffusion models and guarantees motivating second-order correction.
+- **Theoretical analysis:** analysis of delta caching in diffusion models and guarantees motivating second-order correction.
 - **Empirical evaluation** on multiple video diffusion models and benchmarks, showing consistent gains especially under high speedup.
+- **Training-free plug-in:** no additional training or fine-tuning required.
 
 ---
 
-## Repository layout
+## 🏗️ Repository Layout
 
-| Path | Description |
-|------|-------------|
-| [`D2Cache4Wan2.1/`](./D2Cache4Wan2.1/) | Integration with **Wan2.1** (text-to-video); drop-in generation script. |
-| [`D2Cache4Videosys/`](./D2Cache4Videosys/) | **VideoSys**-based implementations for **Latte** and **Open-Sora**, plus VBench-oriented evaluation scripts. |
-| [`D2Cache4LTX-Video/`](./D2Cache4LTX-Video/) | Integration with **LTX-Video** and large-scale VBench generation. |
-| [`showcases/`](./showcases/) | Qualitative comparison videos (default vs. TeaCache-superfast vs. D2Cache-superfast). |
+```
+D2Cache/
+├── D2Cache4Wan2.1/      # Integration with Wan2.1 (text-to-video)
+├── D2Cache4Videosys/     # VideoSys-based implementations for Latte and Open-Sora
+├── D2Cache4LTX-Video/    # Integration with LTX-Video
+├── showcases/            # Qualitative comparison videos
+└── d2cache.pdf           # Camera-ready paper PDF
+```
 
-Each subdirectory contains its own `README.md` with environment setup and commands.
+| Directory | Description | Paper Section |
+|-----------|-------------|---------------|
+| [`D2Cache4Wan2.1/`](./D2Cache4Wan2.1/) | **Wan2.1** text-to-video integration; drop-in generation script | Sec. 4.1 |
+| [`D2Cache4Videosys/`](./D2Cache4Videosys/) | **Latte** and **Open-Sora** via VideoSys; VBench evaluation scripts | Sec. 4.2-4.3 |
+| [`D2Cache4LTX-Video/`](./D2Cache4LTX-Video/) | **LTX-Video** integration; large-scale VBench generation | Sec. 4.4 |
+
+Each subdirectory contains its own `README.md` with environment setup and detailed commands.
 
 ---
 
-## Qualitative comparisons
+## ⚙️ Requirements
 
-The videos below compare **default inference**, **TeaCache (superfast)**, and **D2Cache (superfast)** under matched caching schedules. Reported speedups are from our paper’s experimental setup; see the paper for full settings and metrics.
+- Python ≥ 3.10
+- PyTorch ≥ 2.0
+- CUDA ≥ 11.6
+
+---
+
+## 🚀 Getting Started
+
+### 1. Wan2.1 (Text-to-Video)
+
+```bash
+# Clone and install Wan2.1
+git clone https://github.com/Wan-Video/Wan2.1.git
+cd Wan2.1
+# Follow Wan2.1's official installation instructions
+
+# Copy D2Cache script
+cp /path/to/D2Cache/D2Cache4Wan2.1/delta2cache_generate.py ./
+
+# Generate with D2Cache
+python delta2cache_generate.py \
+  --task t2v-1.3B \
+  --size 832*480 \
+  --ckpt_dir ./Wan2.1-T2V-1.3B \
+  --prompt "Two anthropomorphic cats in comfy boxing gear and bright gloves fight intensely on a spotlighted stage." \
+  --base_seed 42 \
+  --teacache_thresh 0.24 \
+  --teacache_mode delta_delta
+```
+
+The flag `--teacache_mode delta_delta` selects the D2Cache second-order caching path.
+
+### 2. Latte & Open-Sora (VideoSys)
+
+```bash
+cd D2Cache4Videosys
+
+# Create environment
+conda create -n d2cache python=3.10 -y
+conda activate d2cache
+
+# Install
+pip install -e .
+
+# Generate videos
+python latte_delta2.py
+python opensora_delta2.py
+```
+
+### 3. LTX-Video
+
+See [`D2Cache4LTX-Video/README.md`](./D2Cache4LTX-Video/README.md) for detailed instructions.
+
+---
+
+## 📊 Evaluation
+
+### VBench Metrics
+
+```bash
+cd D2Cache4Videosys
+
+# Compute per-metric scores
+python vbench/run_vbench.py --video_path <path_to_videos> --save_path <score_output_dir>
+
+# Aggregate results
+python vbench/cal_vbench.py --score_dir <score_output_dir>
+```
+
+---
+
+## 🎬 Qualitative Comparisons
+
+The videos below compare **default inference**, **TeaCache (superfast)**, and **D2Cache (superfast)** under matched caching schedules. Reported speedups are from our paper's experimental setup; see the paper for full settings and metrics.
 
 ### Wan2.1 (≈3.63× speedup)
 
-<video src="./showcases/1.mp4" controls></video>
-<video src="./showcases/2.mp4" controls></video>
+![Wan2.1 demo 1](./showcases/1.gif)
+![Wan2.1 demo 2](./showcases/2.gif)
 
 ### Latte (≈3.62× speedup)
 
-<video src="./showcases/3.mp4" controls></video>
-<video src="./showcases/4.mp4" controls></video>
+![Latte demo 1](./showcases/3.gif)
+![Latte demo 2](./showcases/4.gif)
 
 ### Open-Sora (≈2.86× speedup)
 
-<video src="./showcases/5.mp4" controls></video>
-<video src="./showcases/6.mp4" controls></video>
+![Open-Sora demo 1](./showcases/5.gif)
+![Open-Sora demo 2](./showcases/6.gif)
 
 ---
 
-## Citation
+## 📝 Citation
 
 If you find this work useful, please cite:
 
@@ -70,16 +164,24 @@ If you find this work useful, please cite:
 }
 ```
 
-*(Update `pages` / `doi` / `url` in the BibTeX entry once the official proceedings metadata is available.)*
+> **Note:** Update `pages`, `doi`, and `url` fields once the official proceedings metadata is available.
 
 ---
 
-## Acknowledgements
+## 🙏 Acknowledgements
 
 This work was supported in part by the Australian Research Council under Projects **DP240101848** and **FT230100549**.
 
 ---
 
-## Contact
+## 📄 License
 
-Questions about the code or paper: open an issue in this repository or email the authors (see addresses above).
+This project is released under the [MIT License](./LICENSE).
+
+---
+
+## 📧 Contact
+
+For questions about the code or paper:
+- Open an [issue](https://github.com/username/D2Cache/issues) in this repository
+- Email the authors (see addresses above)

@@ -6,8 +6,8 @@ This folder provides a minimal integration of **D2Cache** with the **Wan2.1** te
 
 Under comparable acceleration, D2Cache improves visual quality relative to strong first-order caching (e.g., TeaCache). The qualitative examples in [`../showcases/`](../showcases/) include Wan2.1 at roughly **3.63×** speedup in our experiments.
 
-<video src="../showcases/1.mp4" controls></video>
-<video src="../showcases/2.mp4" controls></video>
+![Wan2.1 demo 1](../showcases/1.gif)
+![Wan2.1 demo 2](../showcases/2.gif)
 
 ## Prerequisites
 

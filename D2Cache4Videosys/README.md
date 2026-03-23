@@ -31,6 +31,18 @@ Follow `requirements.txt` and upstream **VideoSys** / **ColossalAI** notes if yo
 - `opensora_delta2.py` — Open-Sora generation with the same framework.  
 - `vbench/` — Helpers to run VBench metrics on generated videos (see scripts below).
 
+## Qualitative Comparisons
+
+**Latte (≈3.62× speedup)**
+
+![Latte demo 1](../showcases/3.gif)
+![Latte demo 2](../showcases/4.gif)
+
+**Open-Sora (≈2.86× speedup)**
+
+![Open-Sora demo 1](../showcases/5.gif)
+![Open-Sora demo 2](../showcases/6.gif)
+
 ## Evaluation (VBench-oriented workflow)
 
 **1. Generate videos** (from prompts / settings used in your experiments):
