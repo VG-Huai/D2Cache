@@ -1,8 +1,8 @@
 <div align="center">
 
-# D2Cache: Second-Order Delta Caching for Higher Video Diffusion Acceleration
+# [CVPR 2026] D2Cache: Second-Order Delta Caching for Higher Video Diffusion Acceleration
 
-**CVPR 2026**
+<!-- **CVPR 2026** -->
 
 [Enhuai Liu](mailto:eliu0719@uni.sydney.edu.au), Yunke Wang, Changming Sun, Chang Xu
 
@@ -151,11 +151,11 @@ If you find this work useful, please cite:
 
 > **Note:** Update `pages`, `doi`, and `url` fields once the official proceedings metadata is available.
 
----
+<!-- ---
 
 ## 🙏 Acknowledgements
 
-This work was supported in part by the Australian Research Council under Projects **DP240101848** and **FT230100549**.
+This work was supported in part by the Australian Research Council under Projects **DP240101848** and **FT230100549**. -->
 
 ---
 
